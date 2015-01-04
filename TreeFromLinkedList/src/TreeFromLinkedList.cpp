@@ -3,7 +3,10 @@
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Create tree from Linked list
+//1. TreeFromLinkedList: This creates a tree using recursive method. The third method is better and does the same thing
+//2. TreeFromLinkedList_ArrCount: This also uses recursion, but first loads the LL to an Array, so no repeated curr->next to get to mid node
+//3. RecursiveTreeFromLLWrapper: This method uses the standard recursive method to convert LL to tree and best in this file.
 //============================================================================
 
 #include <iostream>
@@ -134,6 +137,34 @@ TNode * TreeFromLinkedList(TNode *head)
 	return midNode;
 }
 
+TNode * RecursiveTreeFromLL(TNode *head, int size)
+{
+	if(size == 0) return NULL;
+	if (size == 1) {head->Right = NULL; head->Left = NULL; return head;}
+
+	TNode *midNode = head;
+	for (int i = 0; i < size/2; ++i)
+	{
+		midNode = midNode->Right;
+	}
+	midNode->Left = RecursiveTreeFromLL(head, size/2);
+	midNode->Right = RecursiveTreeFromLL(midNode->Right, size - size/2 - 1);
+	return midNode;
+}
+
+TNode * RecursiveTreeFromLLWrapper(TNode *head)
+{
+	if ((head == NULL) || (head->Right == NULL)) return head;
+	TNode *curr = head;
+	int size = 0;
+	while(curr)
+	{
+		++size;
+		curr = curr->Right;
+	}
+	return RecursiveTreeFromLL(head, size);
+}
+
 TNode * RecursiveCreateTree_ArrCount(TNode *ptrArr[], int count)
 {
 	assert(count >= 0);
@@ -200,11 +231,9 @@ int main()
 
 	PrintLinkedList(node1);
 
-//	struct TNode* root = TreeFromLinkedList(node1);
-//	TopToBottom(root);
-
-	struct TNode* root = TreeFromLinkedList_ArrCount(node1);
-	TopToBottom(root);
+//	TopToBottom(TreeFromLinkedList(node1));
+//	TopToBottom(TreeFromLinkedList_ArrCount(node1));
+	TopToBottom(RecursiveTreeFromLLWrapper(node1));
 
 	return 0;
 }
