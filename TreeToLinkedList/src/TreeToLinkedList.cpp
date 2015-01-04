@@ -4,7 +4,9 @@
  Author      :
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : Convert a Binary Tree to a Linked List
+ 1. void TreeToLinkedList(Node *treeLink, Node **head, Node **tail): NULL inputs of both head and tail are arguments to recursive fxn.
+ 2. void TreeToLinkedList2Wrapper(Node *treeLink, Node **head): tail argument is not given. The wrapper fxn creates it and inputs to recursive gxn. There is no practical difference from previous method
  ============================================================================
  */
 
@@ -52,6 +54,39 @@ void PrintLinkedList(struct Node* head)
 	printf("\n");
 }
 
+void TreeToLinkedList2Recursive(Node *treeLink, Node **head, Node **tail)
+{
+	if (!treeLink) return;
+
+	if (!(treeLink->prev))
+	{
+		if (!(*head)) *head = treeLink;
+	}
+	else
+	{
+		Node *newTail = NULL;
+		TreeToLinkedList2Recursive(treeLink->prev, head, &newTail);
+		newTail->next = treeLink;
+	}
+
+	if (!(treeLink->next))
+	{
+		*tail = treeLink;
+	}
+	else
+	{
+		Node *newHead = NULL;
+		TreeToLinkedList2Recursive(treeLink->next, &newHead, tail);
+		treeLink->next = newHead;
+	}
+}
+
+void TreeToLinkedList2Wrapper(Node *treeLink, Node **head)
+{
+	if (!treeLink) return;
+	Node *tail = NULL;
+	TreeToLinkedList2Recursive(treeLink, head, &tail);
+}
 
 void TreeToLinkedList(Node *treeLink, Node **head, Node **tail)
 {
@@ -89,6 +124,7 @@ int main(void)
 	Node *head = NULL;
 	Node *tail = NULL;
 	TreeToLinkedList(&link0, &head, &tail);
+//	TreeToLinkedList2Wrapper(&link0, &head);
 	PrintLinkedList(head);
 	return EXIT_SUCCESS;
 }
