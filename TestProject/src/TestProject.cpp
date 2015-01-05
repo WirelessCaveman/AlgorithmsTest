@@ -3,7 +3,8 @@
 // Author      : Shailesh Kadamaje
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Small Test programs
+// 1. int WithoutConditions(int a, int b, int c): without using conditional statements, if a != 0, return b, else return c
 //============================================================================
 
 #include <stdio.h>
@@ -11,12 +12,13 @@
 
 int WithoutConditions(int a, int b, int c)
 {
-	// result = a ? b : c;
+//	result = a ? b : c;
 //	return ((a/a) * b) + ((1 - (a/a))*c);
 	int result;
 	(a && (result = b, 1)) || (result = c, 0);
 	return result;
 }
+
 int main()
 {
 	printf("WithoutConditions %d\n", WithoutConditions(5, 3,7));
