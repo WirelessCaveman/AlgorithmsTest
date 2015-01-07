@@ -101,8 +101,6 @@ void LinkedListReverseRecursive(Node **head)
 
 void ReverseDoubleLinkedList(Node **head)
 {
-	if (*head == NULL || (*head)->next == NULL) return;
-
 	Node *prev = NULL;
 	Node *curr = *head;
 
@@ -249,16 +247,16 @@ int main(void)
 //	printf("\nReturn Nth node from End: ");
 //	printf("%d\n\n", (ReturnNthNodeFromEnd(node1, 3))->value);
 
-	printf("Reverse Single Linked List: ");
-	LinkedListReverse(&head1);
-	PrintLinkedList(head1);
+//	printf("Reverse Single Linked List: ");
+//	LinkedListReverse(&head1);
+//	PrintLinkedList(head1);
 //	printf("\n");
 //	LinkedListReverse(&head1);
 //	PrintLinkedList(head1);
 
-//	printf ("ReverseDoubleLinkedList\n");
-//	ReverseDoubleLinkedList(&head1);
-//	PrintLinkedList(head1);
+	printf ("ReverseDoubleLinkedList\n");
+	ReverseDoubleLinkedList(&head1);
+	PrintLinkedList(head1);
 
 //	printf("Merge Linked Lists\n");
 //	PrintLinkedList(head01);
