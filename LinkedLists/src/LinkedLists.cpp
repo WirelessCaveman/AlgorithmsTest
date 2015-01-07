@@ -63,19 +63,17 @@ struct Node* MergeLinkedLists(struct Node *l1, struct Node *l2)
 
 void LinkedListReverse(Node **head)
 {
-	Node *tmp2 = *head;
-	if ((tmp2 == NULL) || (tmp2->next == NULL)) return;
-	Node *tmp1 = tmp2->next;
-	tmp2->next = NULL;
-	while (tmp1 != NULL)
+	Node *curr = *head;
+	Node *prev = NULL;
+
+	while (curr != NULL)
 	{
-		Node* tmp = tmp1->next;
-		tmp1->next = tmp2;
-		tmp2 = tmp1;
-		tmp1 = tmp;
+		Node *tmp  = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = tmp;
 	}
-	*head = tmp2;
-	return;
+	*head = prev;
 }
 
 Node* RecursiveCallLinkedListReverse(Node **head, Node *curr)
@@ -246,14 +244,14 @@ int main(void)
 	struct Node* tail1 = node7;
 	struct Node* head01 = node01;
 
-//	PrintLinkedList(head1);
+	PrintLinkedList(head1);
 
 //	printf("\nReturn Nth node from End: ");
 //	printf("%d\n\n", (ReturnNthNodeFromEnd(node1, 3))->value);
 
-//	printf("Reverse Single Linked List");
-//	LinkedListReverse(&head1);
-//	PrintLinkedList(head1);
+	printf("Reverse Single Linked List: ");
+	LinkedListReverse(&head1);
+	PrintLinkedList(head1);
 //	printf("\n");
 //	LinkedListReverse(&head1);
 //	PrintLinkedList(head1);
@@ -277,10 +275,10 @@ int main(void)
 //	PrintLinkedList(front);
 //	PrintLinkedList(back);
 
-	printf("Linked Lists Reverse Recursive\n");
-	PrintLinkedList(head01);
-	LinkedListReverseRecursive(&head01);
-	PrintLinkedList(head01);
+//	printf("Linked Lists Reverse Recursive\n");
+//	PrintLinkedList(head01);
+//	LinkedListReverseRecursive(&head01);
+//	PrintLinkedList(head01);
 
 	puts("!!!Linked Lists!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
