@@ -73,13 +73,12 @@ class NodeQue
 void DepthFirst(Node *head)
 {
 	NodeStack stack;
-	if (head != NULL)
+	while (head)
 	{
 		printf("%d ", head->Value);
 		if (head->Right != NULL) stack.StackPush(head->Right);
-		if (head->Left != NULL) DepthFirst(head->Left);
-		Node* tmpNode = stack.StackPop();
-		if (tmpNode != NULL) DepthFirst(tmpNode);
+		head = head->Left;
+		if (!head) head = stack.StackPop();
 	}
 }
 
