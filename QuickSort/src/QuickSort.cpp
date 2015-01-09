@@ -63,7 +63,7 @@ void QuickSort_OneDirection(int *arr, int size)
 	front = back;
 	while(front < size - 1)
 	{
-		if (arr[front] <= pivot)
+		if ((arr[front] <= pivot) && (arr[front] != arr[back]))
 		{
 			tmp = arr[front];
 			arr[front] = arr[back];
