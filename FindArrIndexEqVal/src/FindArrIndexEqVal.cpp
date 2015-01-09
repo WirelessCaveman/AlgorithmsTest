@@ -3,7 +3,7 @@
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Find in an array where the index is equal to its data
 //============================================================================
 
 #include <iostream>
