@@ -11,6 +11,9 @@
 #include <stdlib.h>
 #include <assert.h>
 
+//#include "../../StackQueue/StackQueue.h"
+// for linbrary, inclue ../../StackQueue/${ConfigName}/libStackQueue.a
+
 using namespace std;
 
 class Node
