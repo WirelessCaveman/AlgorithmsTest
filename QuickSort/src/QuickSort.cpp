@@ -12,7 +12,45 @@
 
 using namespace std;
 
-void QuickSort(int *arr, int size)
+void QuickSort_FrontBack(int *arr, int size)
+{
+	if (size <= 1) return;
+
+	int pivot = arr[size - 1];
+	int front = size - 2;
+	int back = 0;
+	int tmp = 0;
+
+	while(back < front)
+	{
+		while((front > back) && (arr[back] <= pivot)) {back++;}
+		while((front > back) && (arr[front] >= pivot)) {front--;}
+		if (arr[back] > arr[front])
+		{
+			tmp = arr[back];
+			arr[back] = arr[front];
+			arr[front] = tmp;
+		}
+	}
+	if ((arr[front] < pivot) && (front < size - 1)) front++;
+	if (arr[front] > arr[size - 1])
+	{
+		tmp = arr[front];
+		arr[front] = arr[size - 1];
+		arr[size - 1] = tmp;
+	}
+
+	for(int i = 0; i < size; ++i)
+	{
+		printf("%d\t", arr[i]);
+	}
+	printf("\n");
+
+	QuickSort_FrontBack(arr, front);
+	QuickSort_FrontBack(&(arr[front+1]), size - (front + 1));
+}
+
+void QuickSort_OneDirection(int *arr, int size)
 {
 	if (size <= 1) return;
 
@@ -43,8 +81,8 @@ void QuickSort(int *arr, int size)
 //	}
 //	printf("\n");
 
-	QuickSort(arr, back);
-	QuickSort(&(arr[back + 1]), size - (back + 1));
+	QuickSort_OneDirection(arr, back);
+	QuickSort_OneDirection(&(arr[back + 1]), size - (back + 1));
 }
 
 int main()
@@ -56,7 +94,8 @@ int main()
 	}
 	printf("\n");
 
-	QuickSort(arr, sizeof(arr)/sizeof(int));
+//	QuickSort_OneDirection(arr, sizeof(arr)/sizeof(int));
+	QuickSort_FrontBack(arr, sizeof(arr)/sizeof(int));
 
 	for (int i = 0; i < sizeof(arr)/sizeof(int); ++i)
 	{
