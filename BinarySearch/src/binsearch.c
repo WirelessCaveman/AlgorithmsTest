@@ -16,17 +16,17 @@ int binsearch_nonrec(int arr[], int find, int len)
 	int start = 0, end = len-1;
 	while (end >= start)
 	{
-		int split = (start + end)/2;
-		if (arr[split] == find) return split;
+		int mid = (start + end)/2;
+		if (arr[mid] == find) return mid;
 		else
 		{
-			if (arr[split] > find)
+			if (arr[mid] > find)
 			{
-				end = split - 1;
+				end = mid - 1;
 			}
 			else	//if arr[split] < find
 			{
-				start = split + 1;
+				start = mid + 1;
 			}
 		}
 
@@ -63,7 +63,7 @@ int binsearch_rec (int arr[], int find, int len)
 int main(void)
 {
 	int array[7] = {-3, 4, 4, 6, 21, 22, 22};
-	int find  = 7;
+	int find  = -2;
 	printf("NonRec found %d at %d\n", find, binsearch_nonrec(array, find, 7));
 	printf("Recursive found %d at %d\n", find, binsearch_rec(array, find, 7));
 	return EXIT_SUCCESS;
