@@ -21,6 +21,8 @@ void QuickSort(int *arr, int size)
 	int back = 0;
 	int tmp = 0;
 
+	while ((arr[back] < pivot) && (back < (size - 1))) {back++;}
+	front = back;
 	while(front < size - 1)
 	{
 		if (arr[front] <= pivot)
