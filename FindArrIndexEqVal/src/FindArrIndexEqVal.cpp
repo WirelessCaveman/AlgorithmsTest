@@ -3,7 +3,8 @@
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Find in an array where the index is equal to its data
+// Description : Find in an sorted, non repeated array where the index is
+//		equal to its data. Both non recursive and recursive solutions.
 //============================================================================
 
 #include <iostream>
@@ -18,7 +19,7 @@ int ARR[NUM_INDEX] = {-6, -2, -1, 0, 3, 5, 9, 10, 11, 15};
 int *InArr = ARR;
 
 
-int FindArrIndexEqVal(int *arr, int front, int back)
+int FindArrIndexEqValRec(int *arr, int front, int back)
 {
 	assert (front <= back);
 	int middle = (front + back) / 2;
@@ -32,14 +33,30 @@ int FindArrIndexEqVal(int *arr, int front, int back)
 		int result = -1;
 		if (arr[middle] < middle)
 		{
-			result = FindArrIndexEqVal(arr, middle+1, back);
+			result = FindArrIndexEqValRec(arr, middle+1, back);
 			if (result != -1) return result;
 		}
 		else
 		{
-			result = FindArrIndexEqVal(arr, 0, middle-1);
+			result = FindArrIndexEqValRec(arr, 0, middle-1);
 			if (result != -1) return result;
 		}
+	}
+	return -1;
+}
+
+int FindArrIndexEqVal(int *arr, int size)
+{
+	assert (arr != NULL);
+	while (size > 0)
+	{
+		int mid = size / 2;
+		if (mid == arr[mid]) return mid;
+		else if (mid > arr[mid])
+		{
+			arr = &(arr[mid + 1]);
+		}
+		size -= (mid + 1);
 	}
 	return -1;
 }
@@ -51,6 +68,7 @@ int main()
 	{
 		printf("[%d] %d, ", i, ARR[i]);
 	}
-	printf("\nFindArrIndexEqVal : %d\n", FindArrIndexEqVal(InArr, 0, 9));
+//	printf("\nFindArrIndexEqVal : %d\n", FindArrIndexEqValRec(InArr, 0, 9));
+	printf("\nFindArrIndexExVal : %d\n", FindArrIndexEqVal(InArr, 10));
 	return 0;
 }
