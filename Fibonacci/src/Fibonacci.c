@@ -4,7 +4,7 @@
  Author      : 
  Version     :
  Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+ Description : Fibonacci series implementation in both regular and recursive
  ============================================================================
  */
 
@@ -26,8 +26,8 @@ void FibReg(int len)
 
 int FibRec(int len)
 {
-	if (len <= 0) return -1;
-	else if (1 == len || 2 == len) {return 1;}
+	if (len <= 0) return 0;
+	else if (1 == len) {return 1;}
 	else
 	{
 		return (FibRec(len - 1) + FibRec(len - 2));

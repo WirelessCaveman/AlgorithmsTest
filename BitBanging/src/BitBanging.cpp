@@ -3,7 +3,9 @@
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description :
+//		Parity: return True for Even parity
+//		numBitsSet: return number of set Bits
 //============================================================================
 
 #include <stdio.h>
@@ -46,12 +48,12 @@ int main()
 {
 	unsigned int parityVal = 0xAAAA;
 	if (Parity(parityVal)) printf("%d has odd parity\n", parityVal);
-	else printf("%d has even parity\n", parityVal);
+	else printf("0x%X has even parity\n", parityVal);
 	parityVal = 0xd;
-	if (Parity(parityVal)) printf("%d has odd parity\n", parityVal);
+	if (Parity(parityVal)) printf("0x%X has odd parity\n", parityVal);
 	else printf("%d has even parity\n", parityVal);
 
 	int number = 0x54;
-	printf("numBitsSet(%x): %d", number, numBitsSet(number));
+	printf("numBitsSet(0x%X): %d", number, numBitsSet(number));
 	return 0;
 }
