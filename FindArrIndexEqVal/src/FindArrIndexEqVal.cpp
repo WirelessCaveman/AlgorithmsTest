@@ -15,7 +15,7 @@
 using namespace std;
 
 const int NUM_INDEX = 10;
-int ARR[NUM_INDEX] = {-6, -2, -1, 0, 3, 5, 9, 10, 11, 15};
+int ARR[NUM_INDEX] = {-6, -2, -1, 0, 3, 4, 6, 10, 11, 15};
 int *InArr = ARR;
 
 
@@ -48,15 +48,20 @@ int FindArrIndexEqValRec(int *arr, int front, int back)
 int FindArrIndexEqVal(int *arr, int size)
 {
 	assert (arr != NULL);
-	while (size > 0)
+	int start = 0;
+	int end = size - 1;
+	while (end >= start)
 	{
-		int mid = size / 2;
+		int mid = (start + end) / 2;
 		if (mid == arr[mid]) return mid;
 		else if (mid > arr[mid])
 		{
-			arr = &(arr[mid + 1]);
+			start = mid + 1;
 		}
-		size -= (mid + 1);
+		else
+		{
+			end = mid - 1;
+		}
 	}
 	return -1;
 }
