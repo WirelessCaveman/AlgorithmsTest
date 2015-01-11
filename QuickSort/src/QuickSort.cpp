@@ -33,7 +33,7 @@ void QuickSort_FrontBack(int *arr, int size)
 		}
 	}
 	if ((arr[front] < pivot) && (front < size - 1)) front++;
-	if (arr[front] > arr[size - 1])
+	if (arr[front] > arr[size - 1])	//don't bother swap if equal to pivot
 	{
 		tmp = arr[front];
 		arr[front] = arr[size - 1];
@@ -59,11 +59,11 @@ void QuickSort_OneDirection(int *arr, int size)
 	int back = 0;
 	int tmp = 0;
 
-	while ((arr[back] < pivot) && (back < (size - 1))) {back++;}
-	front = back;
+	while ((arr[back] <= pivot) && (back < (size - 1))) {back++;}
+	front = back + 1;	//element at [back] is greater than pivot because of previous while loop
 	while(front < size - 1)
 	{
-		if ((arr[front] <= pivot) && (arr[front] != arr[back]))
+		if (arr[front] <= pivot) //no need to confirm front != back because at init front = back + 1
 		{
 			tmp = arr[front];
 			arr[front] = arr[back];
@@ -94,8 +94,8 @@ int main()
 	}
 	printf("\n");
 
-//	QuickSort_OneDirection(arr, sizeof(arr)/sizeof(int));
-	QuickSort_FrontBack(arr, sizeof(arr)/sizeof(int));
+	QuickSort_OneDirection(arr, sizeof(arr)/sizeof(int));
+//	QuickSort_FrontBack(arr, sizeof(arr)/sizeof(int));
 
 	for (int i = 0; i < sizeof(arr)/sizeof(int); ++i)
 	{
