@@ -44,7 +44,7 @@ int MinCoinsForChangeRecursive(int val, int *arr)
 
 int MinCoinsForChangeRecursiveWrap(int val)
 {
-	int *arr = (int *)malloc(sizeof(int) * (val + 1));
+	int arr[val + 1];	//how is this working?
 	arr[0] = 0;
 	int coin = 0;
 	for (int i = 1; i <= val; ++i)
@@ -56,13 +56,14 @@ int MinCoinsForChangeRecursiveWrap(int val)
 		}
 		else arr[i] = -1;
 	}
-	return MinCoinsForChangeRecursive(val, arr);
+	int minCoins = MinCoinsForChangeRecursive(val, arr);
+	return minCoins;
 }
 
 int MinCoinsForChangeIterative(int val)
 {
 	assert(val >= 0);
-	int *arr = (int *)malloc(sizeof(int) * (val + 1));
+	int arr[val + 1];	//how is this working?
 	arr[0] = 0;
 
 	for (int i = 1; i <= val; ++i)
@@ -82,6 +83,7 @@ int MinCoinsForChangeIterative(int val)
 
 int main()
 {
-	printf("Min coins to get exact change: %d", MinCoinsForChangeRecursiveWrap(16));
+	printf("Min coins to get exact change (rec): %d\n", MinCoinsForChangeRecursiveWrap(16));
+	printf("Min coins to get exact change (iter): %d\n", MinCoinsForChangeIterative(16));
 	return 0;
 }
