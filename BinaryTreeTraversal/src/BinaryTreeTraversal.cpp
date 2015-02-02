@@ -3,7 +3,7 @@
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Binary tree traversal
 //============================================================================
 
 #include <iostream>
@@ -27,49 +27,49 @@ public:
 
 class NodeStack
 {
-	public:
-		NodeStack(void) : NodeStackIndex(0) {}
-		void StackPush(Node *nodePtr)
-		{
-			if (NodeStackIndex < MAX_NODES) NodeStackArr[NodeStackIndex++] = nodePtr;
-		}
+public:
+	NodeStack(void) : NodeStackIndex(0) {}
+	void StackPush(Node *nodePtr)
+	{
+		if (NodeStackIndex < MAX_NODES) NodeStackArr[NodeStackIndex++] = nodePtr;
+	}
 
-		Node* StackPop(void)
-		{
-			if (NodeStackIndex > 0) return NodeStackArr[--NodeStackIndex];
-			else return NULL;
-		}
-	private:
-		static const int MAX_NODES = 50;
-		Node* NodeStackArr[MAX_NODES];
-		int NodeStackIndex;
+	Node* StackPop(void)
+	{
+		if (NodeStackIndex > 0) return NodeStackArr[--NodeStackIndex];
+		else return NULL;
+	}
+private:
+	static const int MAX_NODES = 50;
+	Node* NodeStackArr[MAX_NODES];
+	int NodeStackIndex;
 };
 
 class NodeQue
 {
-	public:
-		NodeQue(void) : NodeQueHead(0), NodeQueTail(0), NodeQueCount(0) {}
-		void QuePush(Node *nodePtr)
-		{
-			assert(NodeQueCount < MAX_NODES);
-			if (NodeQueHead >= MAX_NODES) {NodeQueHead = 0;}
-			NodeQueArr[NodeQueHead++] = nodePtr;
-			++NodeQueCount;
-		}
+public:
+	NodeQue(void) : NodeQueHead(0), NodeQueTail(0), NodeQueCount(0) {}
+	void QuePush(Node *nodePtr)
+	{
+		assert(NodeQueCount < MAX_NODES);
+		if (NodeQueHead >= MAX_NODES) {NodeQueHead = 0;}
+		NodeQueArr[NodeQueHead++] = nodePtr;
+		++NodeQueCount;
+	}
 
-		Node* QuePull(void)
-		{
-			if (NodeQueCount <= 0) return NULL;
-			--NodeQueCount;
-			if (NodeQueTail >= MAX_NODES) {NodeQueTail = 0;}
-			return NodeQueArr[NodeQueTail++];
-		}
-	private:
-		static const int MAX_NODES = 50;
-		Node* NodeQueArr[MAX_NODES];
-		int NodeQueHead;
-		int NodeQueTail;
-		int NodeQueCount;
+	Node* QuePull(void)
+	{
+		if (NodeQueCount <= 0) return NULL;
+		--NodeQueCount;
+		if (NodeQueTail >= MAX_NODES) {NodeQueTail = 0;}
+		return NodeQueArr[NodeQueTail++];
+	}
+private:
+	static const int MAX_NODES = 50;
+	Node* NodeQueArr[MAX_NODES];
+	int NodeQueHead;
+	int NodeQueTail;
+	int NodeQueCount;
 };
 
 
@@ -92,6 +92,32 @@ void DepthFirstRecursive(Node *head)
 		printf("%d ", head->Value);
 		DepthFirstRecursive(head->Left);
 		DepthFirstRecursive(head->Right);
+	}
+}
+
+void IncreasingOrder(Node *head)
+{
+	NodeStack stack;
+	while (head)
+	{
+		if (head->Left)
+		{
+			stack.StackPush(head);
+			head = head->Left;
+		}
+		else
+		{
+			while (head)
+			{
+				printf("%d ", head->Value);
+				if (head->Right)
+				{
+					head = head->Right;
+					break;
+				}
+				else head = stack.StackPop();
+			}
+		}
 	}
 }
 
@@ -190,7 +216,7 @@ void BinaryTreeMirrorRecursion(Node *head)
 				      6								12
 				   5     6
 
-*********************************************************/
+ *********************************************************/
 
 int main()
 {
@@ -206,7 +232,10 @@ int main()
 	Node *node17= new struct Node(17, node10, node25);
 	Node *node8 = new struct Node(8, node4, node17);
 
-	printf("DepthFirst\n");
+	printf ("Increasing order\n");
+	IncreasingOrder(node8);
+
+	printf("\n\nDepthFirst\n");
 	DepthFirst(node8);
 
 	printf("\n\n");
@@ -235,6 +264,5 @@ int main()
 	BinaryTreeMirrorRecursion(node8);
 	TopToBottom(node8);
 
-//	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
 	return 0;
 }
