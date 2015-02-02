@@ -25,7 +25,7 @@ void Reverse(char *string)
 	char *end = string;
 
 	while (*(end++)) {}
-	end -= 2;
+	end -= 2;	//go to '\0' and then 'g'
 
 	// Reverse entire string
 	while (start < end)
@@ -67,8 +67,8 @@ void Reverse(char *string)
 
 int main()
 {
-//	char *testString = "This is a string";
-	char testString[] = "This is a string\0";
+//	char *testString = "This is a string";	//Bad
+	char testString[] = "This is a string";
 	Reverse(testString);
 	printf("%s\n", testString);
 
